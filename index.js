@@ -4,6 +4,7 @@ var warning = document.getElementById('tip-warning');
 
 var i,count=0; 
 var pep_tip=0;
+var tip_round,tot_round;
 
 var cos = document.getElementById('bill-input').innerHTML;
 // console.log(cos);
@@ -64,7 +65,14 @@ function get_tip()
     }
     if(tip_value == 0)
     {
-        tip_value = document.getElementById('custom_tip').value;
+        if(document.getElementById('custom_tip').value == null)
+        {
+            tip_value = 0;
+        }
+        else
+        {
+            tip_value = document.getElementById('custom_tip').value;
+        }
     }
 
     return tip_value;
@@ -84,9 +92,15 @@ function calculate()
 
     tip_per = ((pep_tip * bill_price)/100.0)/people;
     tot_per = bill_price/people + tip_per;
+
+    // tip_round = Math.round(((tip_per*100)%10));
+    // tip_per = (((tip_per*100)/10)*10 + tip_round)/100.0;
+
+    // tot_round = Math.round(((tot_per*100)%10));
+    // tot_per = (((tot_per*100)/10)*10 + tot_round)/100.0;
     
-    document.getElementById('tip-price').textContent = tip_per;
-    document.getElementById('total-price').textContent = tot_per;
+    document.getElementById('tip-price').textContent = Math.round(tip_per);
+    document.getElementById('total-price').textContent = Math.round(tot_per);
     tip_value =0;
 }
 
